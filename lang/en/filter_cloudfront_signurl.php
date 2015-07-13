@@ -23,8 +23,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
-$string['distributionurl'] = 'Distribution base URL';
-$string['distributionurldesc'] = 'The cloudfront URL of the distribution e.g. d111111abcdef8.cloudfront.net';
+$string['distributionurl'] = 'Distribution base URLs';
+$string['distributionurldesc'] = 'The cloudfront URLs of the distributions e.g. d111111abcdef8.cloudfront.net';
 $string['errornokeyid'] = 'Missing Key Pair ID';
 $string['errornoprivatekey'] = 'Missing Key Private SSH Key File'; 
 $string['errornourl'] = 'No distribution URL provided';

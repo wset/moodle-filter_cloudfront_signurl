@@ -29,7 +29,7 @@ if ($ADMIN->fulltree) {
     require_once(__DIR__ . '/lib.php');
     require_once(__DIR__ . '/adminlib.php');
 
-    $settings->add(new admin_setting_configtext('filter_cloudfront_signurl/distributionurl',
+    $settings->add(new admin_setting_configtextarea('filter_cloudfront_signurl/distributionurl',
         get_string('distributionurl', 'filter_cloudfront_signurl'),
         get_string('distributionurldesc', 'filter_cloudfront_signurl'),
         ''));

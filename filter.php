@@ -43,22 +43,31 @@ require_once($CFG->dirroot.'/filter/cloudfront_signurl/lib.php');
             return $text;
         }
         
-        if (! $disturl = get_config('filter_cloudfront_signurl','distributionurl') ){
+        if (! $disturls = get_config('filter_cloudfront_signurl','distributionurl') ){
             //  Stop if no url set to look for
             return $text;
         }
-
-        // Strip protocol and trailing / from disturl if present
-        $disturl = preg_replace('~^https?://|/$~','',$disturl);
         
-       if (stripos($text, $disturl) === false) {
-            // Performance shortcut - all regexes below contain the distribution url,
+        if (stripos($text, 'http') === false) {
+            // Performance shortcut - all regexes below contain http/https protocol,
             // if not present nothing can match.
             return $text;
         }
+        
+        $urls = preg_split("~\s+~", $disturls);
+        $regexurls = array();
+
+        // Strip protocol and trailing / from disturl if present
+        foreach ($urls as $disturl) {
+            $disturl = preg_replace('~^https?://|/$~','',$disturl);
+            if($disturl !== ''){
+                $regexurls[] = $disturl;
+            }
+        }
+        $urlregex = implode("|",$regexurls);
 
         //$newtext = preg_replace_callback($re = '~(https?://'.$disturl.'/^( |#|"|\')*~is',
-        $newtext = preg_replace_callback($re = '~https?://'.$disturl.'/[^ #"]*~is',
+        $newtext = preg_replace_callback($re = '~https?://('.$urlregex.')/[^ #"]*~is',
             array($this, 'callback'), $text);
         
         if (empty($newtext) or $newtext === $text) {
