@@ -79,7 +79,6 @@ require_once($CFG->dirroot.'/filter/cloudfront_signurl/lib.php');
     }
     
     private function callback(array $matches) {
-        return get_canned_policy_stream_name($matches[0]);
+        return filter_cloudfront_signurl_urlsigner::get_canned_policy_stream_name($matches[0]);
    }
 }
-?>
